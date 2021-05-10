@@ -1,1 +1,1 @@
-console.log("Hello API");
+console.log("Welcome to GestionAbsence API!");
