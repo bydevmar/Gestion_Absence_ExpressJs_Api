@@ -4,7 +4,8 @@ const Schema = mongoose.Schema;
 
 //create schemamodel
 const filiersSchema = new Schema({
-    designation : String
+    designation : String,
+    code_niveaux : String
 })
 
 const Filier = mongoose.model( "Filier" , filiersSchema );
