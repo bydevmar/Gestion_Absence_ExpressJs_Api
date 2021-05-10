@@ -6,7 +6,7 @@ const Schema = mongoose.Schema;
 const filiersSchema = new Schema({
     designation : String,
     code_niveaux : String
-})
+},{ timestamps: true })
 
 const Filier = mongoose.model( "Filier" , filiersSchema );
 

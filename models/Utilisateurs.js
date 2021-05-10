@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const soft_delete = require('mongoose-softdelete');
 
 const Schema = mongoose.Schema;
 
@@ -11,7 +12,9 @@ const utilisateurSchema = new Schema({
     cin : String,
     motdepasse : String,
     type : String
-})
+},{ timestamps: true })
+
+utilisateurSchema.plugin(soft_delete);
 
 const Utilisateur = mongoose.model("Utilisateur",utilisateurSchema);
 
