@@ -8,7 +8,6 @@ const stagiaireAPI = require('./routes/StagiaireAPI');
 const affectationAPI = require('./routes/AffectationAPI');
 const absenceAPI = require('./routes/AbsenceAPI');
 
-
 //set up express app
 const app = express();
 
@@ -20,14 +19,9 @@ app.listen(port ,()=>{
 //middleware 
 app.use(express.json());
 
-
-app.use(utilisateurRoutes);
-app.use(niveauAPI);
-app.use(filierAPI);
-app.use(groupeAPI);
-app.use(stagiaireAPI);
-app.use(affectationAPI);
-app.use(absenceAPI);
+//routes
+const routes =[utilisateurRoutes,niveauAPI,filierAPI,groupeAPI,stagiaireAPI,affectationAPI,absenceAPI];
+app.use(routes);
 
 
 //connect to mongoDB
