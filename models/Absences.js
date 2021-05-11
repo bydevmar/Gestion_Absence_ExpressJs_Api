@@ -1,7 +1,6 @@
-const mongoose = require("mongoose");
-const soft_delete = require('mongoose-softdelete');
-
-const Schema = mongoose.Schema;
+const mongoose = require('mongoose'),
+      Schema = mongoose.Schema,
+      mongoose_delete = require('mongoose-delete');
 
 const AbsencesSchema = new Schema({
     code_stagiaire : mongoose.string,
@@ -11,7 +10,7 @@ const AbsencesSchema = new Schema({
     heurefin :Date
 },{ timestamps: true })
 
-AbsencesSchema.plugin(soft_delete);
+AbsencesSchema.plugin(mongoose_delete);
 
 const Absence = mongoose.model( "Absence" , AbsencesSchema );
 

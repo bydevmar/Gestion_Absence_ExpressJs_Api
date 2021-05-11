@@ -1,7 +1,6 @@
-const mongoose = require("mongoose");
-const soft_delete = require('mongoose-softdelete');
-
-const Schema = mongoose.Schema;
+const mongoose = require('mongoose'),
+      Schema = mongoose.Schema,
+      mongoose_delete = require('mongoose-delete');
 
 const StagiairesSchema = new Schema({
     numinscription : String ,
@@ -10,7 +9,7 @@ const StagiairesSchema = new Schema({
     code_groupe : String ,
 },{ timestamps: true })
 
-StagiairesSchema.plugin(soft_delete);
+StagiairesSchema.plugin(mongoose_delete);
 
 const Stagiaire = mongoose.model( "Affectation" , StagiairesSchema );
 

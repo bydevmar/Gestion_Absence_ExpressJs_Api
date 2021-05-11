@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require('mongoose');
-const routes = require('./routes/UtilsateurAPI');
+const utilisateurRoutes = require('./routes/UtilsateurAPI');
+const NiveauAPI = require('./routes/NiveauAPI');
 
 
 //set up express app
@@ -15,7 +16,8 @@ app.listen(port ,()=>{
 app.use(express.json());
 
 
-app.use(routes);
+app.use(utilisateurRoutes);
+app.use(niveauxRoutes);
 
 
 //connect to mongoDB

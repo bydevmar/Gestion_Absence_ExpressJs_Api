@@ -1,7 +1,6 @@
-const mongoose = require("mongoose");
-const soft_delete = require('mongoose-softdelete');
-
-const Schema = mongoose.Schema;
+const mongoose = require('mongoose'),
+      Schema = mongoose.Schema,
+      mongoose_delete = require('mongoose-delete');
 
 //create schemamodel
 const AffictationsSchema = new Schema({
@@ -9,7 +8,7 @@ const AffictationsSchema = new Schema({
     code_groupe : String,
 },{ timestamps: true })
 
-AffictationsSchema.plugin(soft_delete);
+AffictationsSchema.plugin(mongoose_delete);
 
 const Affectation = mongoose.model( "Affectation" , AffictationsSchema );
 

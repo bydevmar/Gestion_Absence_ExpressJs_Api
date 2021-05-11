@@ -2,7 +2,6 @@ const mongoose = require('mongoose'),
       Schema = mongoose.Schema,
       mongoose_delete = require('mongoose-delete');
 
-
 //create schemamodel
 const utilisateurSchema = new Schema({
     email : String,
