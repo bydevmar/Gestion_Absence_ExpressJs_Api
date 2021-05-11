@@ -25,14 +25,23 @@ router.post('/api/utilisateurs',(req,res)=>{
 
 //update new user 
 router.put('/api/utilisateurs/:id',(req,res)=>{
-    Utilisateur.findOneAndUpdate( { _id : req.params.id } , req.body )
+    Utilisateur.findOneAndUpdate( { _id : req.params.id } , req.body)
     .then(()=>{
-        Utilisateur.findOne( { id_ : req.params.id })
+        Utilisateur.findOne( { _id : req.params.id } )
         .then((utilisateur)=>{
             res.send(utilisateur);
         })
     })
 })
+
+//delete users
+router.delete("/api/utilisateurs/:id", (req,res) => {
+    Utilisateur.findOne( { _id : req.params.id } ).then((utilisateur)=>{
+        utilisateur.delete().then((delutilisateur)=>{
+            res.send(delutilisateur);
+        })
+    })
+});
 
 
 
