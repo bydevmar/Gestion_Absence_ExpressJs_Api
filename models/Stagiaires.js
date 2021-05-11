@@ -6,11 +6,11 @@ const StagiairesSchema = new Schema({
     numinscription : String ,
     nom:String ,
     prenom : String ,
-    code_groupe : String ,
+    code_groupe : String
 },{ timestamps: true })
 
 StagiairesSchema.plugin(mongoose_delete);
 
-const Stagiaire = mongoose.model( "Affectation" , StagiairesSchema );
+const Stagiaire = mongoose.model( "Stagiaire" , StagiairesSchema );
 
 module.exports = Stagiaire;

@@ -4,6 +4,7 @@ const utilisateurRoutes = require('./routes/UtilsateurAPI');
 const niveauAPI = require('./routes/NiveauAPI');
 const filierAPI = require('./routes/FilierAPI');
 const groupeAPI = require('./routes/GroupeAPI');
+const stagiaireAPI = require('./routes/StagiaireAPI');
 
 
 //set up express app
@@ -22,6 +23,7 @@ app.use(utilisateurRoutes);
 app.use(niveauAPI);
 app.use(filierAPI);
 app.use(groupeAPI);
+app.use(stagiaireAPI);
 
 
 //connect to mongoDB
