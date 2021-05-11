@@ -1,7 +1,8 @@
 const express = require("express");
 const mongoose = require('mongoose');
 const utilisateurRoutes = require('./routes/UtilsateurAPI');
-const NiveauAPI = require('./routes/NiveauAPI');
+const niveauAPI = require('./routes/NiveauAPI');
+const filierAPI = require('./routes/FilierAPI');
 
 
 //set up express app
@@ -17,7 +18,8 @@ app.use(express.json());
 
 
 app.use(utilisateurRoutes);
-app.use(niveauxRoutes);
+app.use(niveauAPI);
+app.use(filierAPI);
 
 
 //connect to mongoDB

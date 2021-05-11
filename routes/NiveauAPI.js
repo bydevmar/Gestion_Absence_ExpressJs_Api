@@ -1,18 +1,14 @@
 const express = require("express");
 const router = express.Router();
 
-
-
 const Niveau = require("../models/Niveaux");
 
-//Get all Niveaux 
 router.get('/api/niveaux/',(req,res)=>{
     Niveau.find({}).then( (niveaux) => {
         res.send(niveaux);
     });
 });
 
-//Create new Niveau 
 router.post('/api/niveaux/',(req,res)=>{
     Niveau.create(req.body)
     .then((niveau)=>{
@@ -33,7 +29,6 @@ router.put('/api/niveaux/:id',(req,res)=>{
     })
 })
 
-//delete users
 router.delete("/api/niveaux/:id", (req,res) => {
     Niveau.findOne( { _id : req.params.id } )
     .then((niveau)=>{
@@ -42,6 +37,5 @@ router.delete("/api/niveaux/:id", (req,res) => {
         })
     })
 });
-
 
 module.exports = router;
