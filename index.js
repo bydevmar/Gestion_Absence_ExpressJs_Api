@@ -6,6 +6,7 @@ const filierAPI = require('./routes/FilierAPI');
 const groupeAPI = require('./routes/GroupeAPI');
 const stagiaireAPI = require('./routes/StagiaireAPI');
 const affectationAPI = require('./routes/AffectationAPI');
+const absenceAPI = require('./routes/AbsenceAPI');
 
 
 //set up express app
@@ -26,6 +27,7 @@ app.use(filierAPI);
 app.use(groupeAPI);
 app.use(stagiaireAPI);
 app.use(affectationAPI);
+app.use(absenceAPI);
 
 
 //connect to mongoDB

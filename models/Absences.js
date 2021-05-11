@@ -3,10 +3,10 @@ const mongoose = require('mongoose'),
       mongoose_delete = require('mongoose-delete');
 
 const AbsencesSchema = new Schema({
-    code_stagiaire : mongoose.string,
-    formateur : String,
-    dateabsence : Date ,
-    heuedebut : Date,
+    id_stagiaire : String,
+    id_formateur : String,
+    dateabsence : Date , //on peut applique la data d'aujourd'hui by default
+    heuredebut : Date,
     heurefin :Date
 },{ timestamps: true })
 
