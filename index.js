@@ -5,6 +5,7 @@ const niveauAPI = require('./routes/NiveauAPI');
 const filierAPI = require('./routes/FilierAPI');
 const groupeAPI = require('./routes/GroupeAPI');
 const stagiaireAPI = require('./routes/StagiaireAPI');
+const affectationAPI = require('./routes/AffectationAPI');
 
 
 //set up express app
@@ -24,6 +25,7 @@ app.use(niveauAPI);
 app.use(filierAPI);
 app.use(groupeAPI);
 app.use(stagiaireAPI);
+app.use(affectationAPI);
 
 
 //connect to mongoDB

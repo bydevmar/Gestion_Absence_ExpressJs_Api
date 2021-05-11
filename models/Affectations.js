@@ -4,8 +4,8 @@ const mongoose = require('mongoose'),
 
 //create schemamodel
 const AffictationsSchema = new Schema({
-    email : String,
-    code_groupe : String,
+    id_formateur : String,
+    id_groupe : String,
 },{ timestamps: true })
 
 AffictationsSchema.plugin(mongoose_delete);
