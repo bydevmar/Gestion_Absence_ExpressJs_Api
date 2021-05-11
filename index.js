@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require('mongoose');
+const routes = require('./routes/UtilsateurAPI');
 
 
 //set up express app
@@ -13,8 +14,11 @@ app.listen(port ,()=>{
 //middleware 
 app.use(express.json());
 
+
+app.use(routes);
+
+
 //connect to mongoDB
-const url = "mongodb://127.0.0.1/GestionAbsence"
-mongoose.connect(url,{ useNewUrlParser: true , useUnifiedTopology: true}).then(()=>{
-    console.log("mongodb is connected!!");
-});
+const url = "mongodb://localhost/GestionAbsence"
+mongoose.connect(url,{ useNewUrlParser: true , useUnifiedTopology: true})
+mongoose.Promise = global.Promise;

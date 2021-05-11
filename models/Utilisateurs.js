@@ -1,7 +1,7 @@
-const mongoose = require("mongoose");
-const soft_delete = require('mongoose-softdelete');
+const mongoose = require('mongoose'),
+      Schema = mongoose.Schema,
+      mongoose_delete = require('mongoose-delete');
 
-const Schema = mongoose.Schema;
 
 //create schemamodel
 const utilisateurSchema = new Schema({
@@ -12,9 +12,9 @@ const utilisateurSchema = new Schema({
     cin : String,
     motdepasse : String,
     type : String
-},{ timestamps: true })
+},{ timestamps: true });
 
-utilisateurSchema.plugin(soft_delete);
+utilisateurSchema.plugin(mongoose_delete);
 
 const Utilisateur = mongoose.model("Utilisateur",utilisateurSchema);
 
