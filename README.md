@@ -7,4 +7,4 @@
 # npm install -D nodemon
 
 # installer soft delete package 
-# npm install mongoose-softdelete --save
+# npm install mongoose-delete --save
