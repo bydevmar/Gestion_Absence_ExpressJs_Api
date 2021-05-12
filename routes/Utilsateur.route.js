@@ -12,12 +12,12 @@ router.get('/api/utilisateurs/:id_g',(req,res)=>{
             .then((utilisateurs)=>{
                 res.send({
                     status : "OK",
-                    result : utilisateurs
+                    result : utilisateurs.filter(user  => user.deleted == true)
                 });
             }).catch((err)=>{
                 res.send({
-                    status : "OK",
-                    result : err
+                    status : "ERROR",
+                    details : err
                 });
             })
         }
@@ -105,16 +105,17 @@ router.put('/api/utilisateurs/:id_g/:id_u',async (req,res)=>{
 })
 
 router.delete("/api/utilisateurs/:id_g/:id_u", (req,res) => {
-    Utilisateur.findOne( { _id : req.params.id } ).then((utilisateur)=>{
-        utilisateur.delete().then((delutilisateur)=>{
-            res.send(delutilisateur);
-        })
-    })
     Utilisateur.findById(req.params.id_g)
     .then((utilisateur)=>{
         if(utilisateur.type == "Gestionnaire"){
             Utilisateur.findById(req.params.id_u)
             .then((utilisateur)=>{
+                if(utilisateur.deleted == true){
+                    return res.send({
+                        status : "ERROR",
+                        message : "Utilisateur deja supprimé!"
+                    });
+                }
                 utilisateur.delete()
                 .then((deleteduser)=>{
                     res.status(400).send({
