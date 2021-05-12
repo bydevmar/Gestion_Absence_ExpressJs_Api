@@ -4,13 +4,29 @@ const router = express.Router();
 const Utilisateur = require("../models/Utilisateurs.model");
 const utilisateurSchema = require('../helpers/utilisateur.validator')
 
-router.get('/api/utilisateurs/',(req,res)=>{
-    Utilisateur.find({}).then( (utilisateurs) => {
-        res.send(utilisateurs);
-    });
+router.get('/api/utilisateurs/:id_g',(req,res)=>{
+    Utilisateur.findById(req.params.id_g).then((utilisateur)=>{
+        if(utilisateur.type == "Gestionnaire"){
+            Utilisateur.find({}).then( (utilisateurs) => {
+                res.send({
+                    status : "OK",
+                    result : utilisateurs
+                });
+            });
+        }
+        else{
+            res.status(400).send({
+                status : "ERROR",
+                message : "excusez moi vous etes pas un administrateur!"
+            });
+        }
+    })
 });
 
-router.post('/api/utilisateurs',async(req,res)=>{
+router.post('/api/utilisateurs/:id_g',async(req,res)=>{
+    Utilisateur.findById(req.params.id_g).then((utilisateur)=>{
+        return res.send(utilisateur);
+    })
     await utilisateurSchema.validateAsync(req.body).then((result)=>{
         Utilisateur.create(req.body)
         .then((utilisateur)=>{
