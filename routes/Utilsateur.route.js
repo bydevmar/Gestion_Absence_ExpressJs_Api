@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const Utilisateur = require("../models/Utilisateurs.model");
-const utilisateurSchema = require('../helpers/utilisateurValidation')
+const utilisateurSchema = require('../helpers/utilisateur.validator')
 
 router.get('/api/utilisateurs/',(req,res)=>{
     Utilisateur.find({}).then( (utilisateurs) => {

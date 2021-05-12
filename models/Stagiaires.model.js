@@ -6,7 +6,7 @@ const StagiairesSchema = new Schema({
     numinscription : String ,
     nom:String ,
     prenom : String ,
-    code_groupe : String
+    id_groupe : String
 },{ timestamps: true })
 
 StagiairesSchema.plugin(mongoose_delete);
