@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const Affectation = require("../models/Affectations.model");
+const affectationSchema = require("../helpers/affectation.validator");
 
 router.get('/api/affectations/',(req,res)=>{
     Affectation.find({}).then( (affectations) => {
@@ -9,24 +10,30 @@ router.get('/api/affectations/',(req,res)=>{
     });
 });
 
-router.post('/api/affectations/',(req,res)=>{
-    Affectation.create(req.body)
-    .then((affectation)=>{
+router.post('/api/affectations/',async(req,res)=>{
+    await affectationSchema.validateAsync(req.body).then(()=>{
+        Affectation.create(req.body)
+        .then((affectation)=>{
         res.send(affectation);
     })
-    .catch((err)=>{
-        res.send(err.message);
+    }).catch((err)=>{
+        res.send(err.details[0].message)
     })
 });
 
-router.put('/api/affectations/:id',(req,res)=>{
-    Affectation.findOneAndUpdate( { _id : req.params.id } , req.body)
-    .then(()=>{
-        Affectation.findOne( { _id : req.params.id } )
-        .then((affectation)=>{
-            res.send(affectation);
-        })
+router.put('/api/affectations/:id',async(req,res)=>{
+    await affectationSchema.validateAsync(req.body).then(()=>{
+        Affectation.findOneAndUpdate( { _id : req.params.id } , req.body)
+        .then(()=>{
+            Affectation.findOne( { _id : req.params.id } )
+            .then((affectation)=>{
+                res.send(affectation);
+            })
     })
+    }).catch((err)=>{
+        res.send(err.details[0].message)
+    })
+    
 })
 
 router.delete("/api/affectations/:id", (req,res) => {
