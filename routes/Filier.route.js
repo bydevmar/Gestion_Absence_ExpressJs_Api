@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const Filier = require("../models/Filiers");
+const Filier = require("../models/Filiers.model");
 
 
 router.get('/api/filiers/',(req,res)=>{

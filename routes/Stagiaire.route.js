@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const Stagiaire = require("../models/Stagiaires");
+const Stagiaire = require("../models/Stagiaires.model");
 
 router.get('/api/stagiaires/',(req,res)=>{
     Stagiaire.find({}).then( (stagiaires) => {

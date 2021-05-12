@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const Niveau = require("../models/Niveaux");
+const Niveau = require("../models/Niveaux.model");
 
 router.get('/api/niveaux/',(req,res)=>{
     Niveau.find({}).then( (niveaux) => {

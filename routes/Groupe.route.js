@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const Groupe = require("../models/Groupes");
+const Groupe = require("../models/Groupes.model");
 
 router.get('/api/groupes/',(req,res)=>{
     Groupe.find({}).then( (groupes) => {

@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const Absence = require("../models/Absences");
+const Absence = require("../models/Absences.model");
 
 router.get('/api/absences/',(req,res)=>{
     Absence.find({}).then( (absences) => {

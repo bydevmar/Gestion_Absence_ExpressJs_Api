@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const Affectation = require("../models/Affectations");
+const Affectation = require("../models/Affectations.model");
 
 router.get('/api/affectations/',(req,res)=>{
     Affectation.find({}).then( (affectations) => {
