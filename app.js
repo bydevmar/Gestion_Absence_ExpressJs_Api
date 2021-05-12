@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require('mongoose');
 
 const utilisateur_routes = require('./routes/utilisateurRoutes/index');
+const niveau_routes = require('./routes/niveauRoutes/index');
 /*
     const niveau_route = require('./routes/Niveau.route');
     const filier_route = require('./routes/Filier.route');
@@ -24,7 +25,7 @@ app.use(express.json());
 
 //routes
 const routes = [ 
-                utilisateur_routes
+                utilisateur_routes , niveau_routes
             ];
 app.use(routes);
 

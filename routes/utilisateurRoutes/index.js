@@ -1,4 +1,3 @@
-
 const getUtilisateur  = require("../utilisateurRoutes/getUtilisateurs.route");
 const postUtilisateur  = require("../utilisateurRoutes/postUtilisateurs.route");
 const putUtilisateur  = require("../utilisateurRoutes/putUtilisateurs.route");

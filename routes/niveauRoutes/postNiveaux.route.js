@@ -1,22 +1,28 @@
 const express = require("express");
 const router = express.Router();
 
+const Niveau = require("../../models/Niveaux.model");
 const Utilisateur = require("../../models/Utilisateurs.model");
+const niveauSchema = require('../../helpers/niveaux.validator')
 
-router.get('/api/utilisateurs/:id_g',(req,res)=>{
+router.post('/api/niveaux/:id_g',(req,res)=>{
     Utilisateur.findById(req.params.id_g)
     .then(async(utilisateur)=>{
         if(utilisateur.type == "Gestionnaire"){
-            Utilisateur.find({})
-            .then((utilisateurs)=>{
-                res.send({
-                    status : "OK",
-                    details : utilisateurs.filter(user  => user.deleted == false)
-                });
+            await niveauSchema.validateAsync(req.body)
+            .then(()=>{
+                Niveau.create(req.body)
+                .then((niveau)=>{
+                    res.send({
+                        status : "OK",
+                        message : "niveau ajouté avec succès!",
+                        details : niveau
+                    });
+            })
             }).catch((err)=>{
                 res.send({
                     status : "ERROR",
-                    details : err
+                    message : err.details[0].message
                 });
             })
         }
