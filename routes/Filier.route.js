@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const Filier = require("../models/Filiers.model");
+const filierSchema = require("../helpers/filier.validator");
 
 
 router.get('/api/filiers/',(req,res)=>{
@@ -11,24 +12,29 @@ router.get('/api/filiers/',(req,res)=>{
 });
 
 
-router.post('/api/filiers/',(req,res)=>{
-    Filier.create(req.body)
-    .then((filier)=>{
-        res.send(filier);
+router.post('/api/filiers/',async(req,res)=>{
+    await filierSchema.validateAsync(req.body).then(()=>{
+        Filier.create(req.body)
+        .then((filier)=>{
+            res.send(filier);
+        });
+    }).catch((err)=>{
+        res.send(err.details[0].message)
     })
-    .catch((err)=>{
-        res.send(err.message);
-    });
 });
 
 
-router.put('/api/filiers/:id',(req,res)=>{
-    Filier.findOneAndUpdate( { _id : req.params.id } , req.body)
-    .then(()=>{
+router.put('/api/filiers/:id',async(req,res)=>{
+    await filierSchema.validateAsync(req.body).then(()=>{
+        Filier.findOneAndUpdate( { _id : req.params.id } , req.body)
+        .then(()=>{
         Filier.findOne( { _id : req.params.id } )
         .then((filier)=>{
             res.send(filier);
         })
+    })
+    }).catch((err)=>{
+        res.send(err.details[0].message)
     })
 })
 
