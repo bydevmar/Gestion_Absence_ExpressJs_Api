@@ -8,10 +8,16 @@ router.get('/api/utilisateurs/:id_g',(req,res)=>{
     Utilisateur.findById(req.params.id_g)
     .then(async(utilisateur)=>{
         if(utilisateur.type == "Gestionnaire"){
-            Utilisateur.find({}).then((utilisateurs)=>{
+            Utilisateur.find({})
+            .then((utilisateurs)=>{
                 res.send({
                     status : "OK",
                     result : utilisateurs
+                });
+            }).catch((err)=>{
+                res.send({
+                    status : "OK",
+                    result : err
                 });
             })
         }
@@ -39,7 +45,8 @@ router.post('/api/utilisateurs/:id_g',(req,res)=>{
                 .then((utilisateur)=>{
                     res.send({
                         status : "OK",
-                        result : utilisateur
+                        message : "utilisateur ajouté avec succès!",
+                        details : utilisateur
                     });
             })
             }).catch((err)=>{
@@ -65,8 +72,8 @@ router.post('/api/utilisateurs/:id_g',(req,res)=>{
 
 router.put('/api/utilisateurs/:id_g/:id_u',async (req,res)=>{
     Utilisateur.findById(req.params.id_g)
-    .then(async(utilisateur)=>{
-        if(utilisateur.type == "Gestionnaire"){
+    .then(async ( utilisateur ) => {
+        if( utilisateur.type == "Gestionnaire"){
             await utilisateurSchema.validateAsync(req.body)
             .then((result)=>{
                 Utilisateur.updateOne({ _id : req.params.id_u } , req.body )
@@ -97,13 +104,44 @@ router.put('/api/utilisateurs/:id_g/:id_u',async (req,res)=>{
     })
 })
 
-router.delete("/api/utilisateurs/:id", (req,res) => {
+router.delete("/api/utilisateurs/:id_g/:id_u", (req,res) => {
     Utilisateur.findOne( { _id : req.params.id } ).then((utilisateur)=>{
         utilisateur.delete().then((delutilisateur)=>{
             res.send(delutilisateur);
         })
     })
+    Utilisateur.findById(req.params.id_g)
+    .then((utilisateur)=>{
+        if(utilisateur.type == "Gestionnaire"){
+            Utilisateur.findById(req.params.id_u)
+            .then((utilisateur)=>{
+                utilisateur.delete()
+                .then((deleteduser)=>{
+                    res.status(400).send({
+                        status : "ERROR",
+                        message : "Utilisateur supprimé avec succès!",
+                        details : deleteduser
+                    });
+                })
+            }).catch(()=>{
+                res.status(400).send({
+                    status : "ERROR",
+                    message : "aucun compte corresponde!"
+                });
+            })
+        }
+        else{
+            res.status(400).send({
+                status : "ERROR",
+                message : "excusez moi vous etes pas un administrateur!"
+            });
+        }
+    }).catch(()=>{
+        res.status(400).send({
+            status : "ERROR",
+            message : "administrateur non trouvable!"
+        });
+    })
 });
-
 
 module.exports = router;
