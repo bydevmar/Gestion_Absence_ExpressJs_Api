@@ -23,18 +23,32 @@ router.get('/api/utilisateurs/:id_g',(req,res)=>{
     })
 });
 
-router.post('/api/utilisateurs/:id_g',async(req,res)=>{
-    Utilisateur.findById(req.params.id_g).then((utilisateur)=>{
-        return res.send(utilisateur);
+router.post('/api/utilisateurs/:id_g',(req,res)=>{
+    Utilisateur.findById(req.params.id_g).then(async(utilisateur)=>{
+        if(utilisateur.type == "Gestionnaire"){
+            await utilisateurSchema.validateAsync(req.body).then(()=>{
+                Utilisateur.create(req.body)
+                .then((utilisateur)=>{
+                    res.send({
+                        status : "OK",
+                        result : utilisateur
+                    });
+            })
+            }).catch((err)=>{
+                res.send({
+                    status : "OK",
+                    message : err.details[0].message
+                });
+            })
+        }
+        else{
+            res.status(400).send({
+                status : "ERROR",
+                message : "excusez moi vous etes pas un administrateur!"
+            });
+        }
     })
-    await utilisateurSchema.validateAsync(req.body).then((result)=>{
-        Utilisateur.create(req.body)
-        .then((utilisateur)=>{
-        res.send(utilisateur);
-    })
-    }).catch((err)=>{
-        res.send(err.details[0].message)
-    })
+    
 });
 
 router.put('/api/utilisateurs/:id',async (req,res)=>{
