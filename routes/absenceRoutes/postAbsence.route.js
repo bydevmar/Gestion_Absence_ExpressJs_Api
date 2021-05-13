@@ -8,7 +8,7 @@ const absenceSchema = require('../../helpers/absences.validator')
 router.post('/api/absences/:id_g',(req,res)=>{
     Utilisateur.findById(req.params.id_g)
     .then(async(utilisateur)=>{
-        if(utilisateur.type == "Gestionnaire"){
+        if(utilisateur.type == "Gestionnaire" || utilisateur.type == "Formateur"){
             await absenceSchema.validateAsync(req.body)
             .then(()=>{
                 Absence.create(req.body)
