@@ -1,16 +1,14 @@
 const express = require("express");
 const mongoose = require('mongoose');
 
-const utilisateur_routes = require('./routes/utilisateurRoutes/index');
-const niveau_routes = require('./routes/niveauRoutes/index');
-/*
-    const niveau_route = require('./routes/Niveau.route');
-    const filier_route = require('./routes/Filier.route');
-    const groupe_route = require('./routes/Groupe.route');
-    const stagiaire_route = require('./routes/Stagiaire.route');
-    const affectation_route = require('./routes/Affectation.route');
-    const absence_route = require('./routes/Absence.route');
-*/
+const utilisateur_Routes = require('./routes/utilisateurRoutes/index');
+const niveau_Routes= require('./routes/niveauRoutes/index');
+const absence_Routes = require('./routes/absenceRoutes/index');
+const affectation_Routes = require('./routes/affectationRoutes/index');
+const stagiaire_Routes = require('./routes/stagiaireRoutes/index');
+const filier_Routes = require('./routes/filierRoutes/index');
+
+
 
 //set up express app
 const app = express();
@@ -25,8 +23,10 @@ app.use(express.json());
 
 //routes
 const routes = [ 
-                utilisateur_routes , niveau_routes
-            ];
+    utilisateur_Routes,  niveau_Routes ,
+    absence_Routes , affectation_Routes ,
+    stagiaire_Routes , filier_Routes
+];
 app.use(routes);
 
 

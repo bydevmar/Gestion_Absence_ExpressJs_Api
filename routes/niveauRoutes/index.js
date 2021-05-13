@@ -1,7 +1,7 @@
-const getniveau  = require("../niveauRoutes/getNiveaux.route");
-const postniveau  = require("../niveauRoutes/postNiveaux.route");
-const putniveau  = require("../niveauRoutes/putNiveaux.route");
-const deleteniveau  = require("../niveauRoutes/deleteNiveaux.route");
+const getniveau  = require("../niveauRoutes/getNiveau.route");
+const postniveau  = require("../niveauRoutes/postNiveau.route");
+const putniveau  = require("../niveauRoutes/putNiveau.route");
+const deleteniveau  = require("../niveauRoutes/deleteNiveau.route");
 
 const routes = [getniveau,postniveau,putniveau,deleteniveau]
 

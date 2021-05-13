@@ -1,27 +1,27 @@
 const express = require("express");
 const router = express.Router();
 
-const Niveau = require("../../models/Niveaux.model");
+const Groupe = require("../../models/Groupes.model");
 const Utilisateur = require("../../models/Utilisateurs.model");
 
-router.delete("/api/niveaux/:id_g/:id_n", (req,res) => {
+router.delete("/api/groupes/:id_g/:id_n", (req,res) => {
     Utilisateur.findById(req.params.id_g)
     .then((utilisateur)=>{
         if(utilisateur.type == "Gestionnaire"){
-            Niveau.findById(req.params.id_n)
-            .then((niveau)=>{
-                if(niveau.deleted == true){
+            Groupe.findById(req.params.id_n)
+            .then((groupe)=>{
+                if(groupe.deleted == true){
                     return res.send({
                         status : "ERROR",
-                        message : "Utilisateur deja supprimé!"
+                        message : "groupe deja supprimé!"
                     });
                 }
-                niveau.delete()
-                .then((delniveau)=>{
+                groupe.delete()
+                .then((delgroupe)=>{
                     res.status(400).send({
                         status : "OK",
-                        message : "niveau supprimé avec succès!",
-                        details : delniveau
+                        message : "groupe supprimé avec succès!",
+                        details : delgroupe
                     });
                 })
             }).catch(()=>{
