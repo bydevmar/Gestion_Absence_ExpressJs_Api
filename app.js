@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require('mongoose');
+const cors = require('cors')
 
 const utilisateur_Routes = require('./routes/utilisateurRoutes/index');
 const niveau_Routes= require('./routes/niveauRoutes/index');
@@ -21,6 +22,7 @@ app.listen(port ,()=>{
 //middleware 
 app.use(express.json());
 
+app.use(cors())
 //routes
 const routes = [ 
     utilisateur_Routes,  niveau_Routes ,
