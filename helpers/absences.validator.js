@@ -10,10 +10,3 @@ const absenceSchema = Joi.object({
 });
 
 module.exports = absenceSchema;
-
-
-
-
-
-
-

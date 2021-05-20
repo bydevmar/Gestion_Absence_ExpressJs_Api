@@ -27,7 +27,7 @@ app.use(cors())
 const routes = [ 
     utilisateur_Routes,  niveau_Routes ,
     absence_Routes , affectation_Routes ,
-    stagiaire_Routes , filier_Routes
+    stagiaire_Routes , filier_Routes 
 ];
 app.use(routes);
 
