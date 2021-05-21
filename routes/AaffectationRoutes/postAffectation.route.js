@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
 
-const Affectation = require("../../models/Affectations.model");
-const Utilisateur = require("../../models/Utilisateurs.model");
-const affectationSchema = require('../../helpers/affectation.validator')
+const Affectation = require("../../models/Affectation.model");
+const Utilisateur = require("../../models/Utilisateur.model");
+const affectationSchema = require('../../helpers/Affectation.validator')
 
 router.post('/api/affectations/:id_g',(req,res)=>{
     Utilisateur.findById(req.params.id_g)

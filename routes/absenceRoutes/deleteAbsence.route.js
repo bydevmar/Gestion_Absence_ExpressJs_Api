@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
 
-const Absence = require("../../models/Absences.model");
-const Utilisateur = require("../../models/Utilisateurs.model");
+const Absence = require("../../models/Absence.model");
+const Utilisateur = require("../../models/Utilisateur.model");
 
 router.delete("/api/absences/:id_g/:id_n", (req,res) => {
     Utilisateur.findById(req.params.id_g)

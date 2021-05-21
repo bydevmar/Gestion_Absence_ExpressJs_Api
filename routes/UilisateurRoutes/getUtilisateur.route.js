@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Utilisateur = require("../../models/Utilisateurs.model");
+const Utilisateur = require("../../models/Utilisateur.model");
 
 router.post('/api/utilisateur', (req, res) => {
     if (req.body.motdepasse != undefined && req.body.email != undefined) {

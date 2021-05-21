@@ -1,7 +1,7 @@
-const getStagiaire  = require("../stagiaireRoutes/getStagiaire.route");
-const postStagiaire  = require("../stagiaireRoutes/postStagiaire.route");
-const putStagiaire  = require("../stagiaireRoutes/putStagiaire.route");
-const deleteStagiaire  = require("../stagiaireRoutes/deleteStagiaire.route");
+const getStagiaire  = require("./getStagiaire.route");
+const postStagiaire  = require("./postStagiaire.route");
+const putStagiaire  = require("./putStagiaire.route");
+const deleteStagiaire  = require("./deleteStagiaire.route");
 
 const routes = [getStagiaire,postStagiaire,putStagiaire,deleteStagiaire]
 

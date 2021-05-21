@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
 
-const Absence = require("../../models/Absences.model");
-const Utilisateur = require("../../models/Utilisateurs.model");
-const absenceSchema = require('../../helpers/absences.validator')
+const Absence = require("../../models/Absence.model");
+const Utilisateur = require("../../models/Utilisateur.model");
+const absenceSchema = require('../../helpers/Absence.validator')
 
 router.post('/api/absences/:id_g',(req,res)=>{
     Utilisateur.findById(req.params.id_g)

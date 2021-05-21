@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
 
-const Affectation = require("../../models/Affectations.model");
-const Utilisateur = require("../../models/Utilisateurs.model");
+const Affectation = require("../../models/Affectation.model");
+const Utilisateur = require("../../models/Utilisateur.model");
 
 router.delete("/api/affectations/:id_g/:id_n", (req,res) => {
     Utilisateur.findById(req.params.id_g)

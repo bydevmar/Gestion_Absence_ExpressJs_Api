@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
 
-const Niveau = require("../../models/Niveaux.model");
-const Utilisateur = require("../../models/Utilisateurs.model");
+const Niveau = require("../../models/Niveau.model");
+const Utilisateur = require("../../models/Utilisateur.model");
 
 router.delete("/api/niveaux/:id_g/:id_n", (req,res) => {
     Utilisateur.findById(req.params.id_g)

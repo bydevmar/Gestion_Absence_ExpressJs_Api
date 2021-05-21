@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
 
-const Filier = require("../../models/Filiers.model");
-const Utilisateur = require("../../models/Utilisateurs.model");
+const Filier = require("../../models/Filier.model");
+const Utilisateur = require("../../models/Utilisateur.model");
 const filierSchema = require('../../helpers/filier.validator')
 
 

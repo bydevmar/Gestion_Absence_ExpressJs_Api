@@ -1,7 +1,7 @@
-const getaffectation  = require("../affectationRoutes/getAffectation.route");
-const postaffectation  = require("../affectationRoutes/postAffectation.route");
-const putaffectation  = require("../affectationRoutes/putAffectation.route");
-const deleteaffectation  = require("../affectationRoutes/deleteAffectation.route");
+const getaffectation  = require("./getAffectation.route");
+const postaffectation  = require("./postAffectation.route");
+const putaffectation  = require("./putAffectation.route");
+const deleteaffectation  = require("./deleteAffectation.route");
 
 const routes = [getaffectation,postaffectation,putaffectation,deleteaffectation]
 

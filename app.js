@@ -2,13 +2,13 @@ const express = require("express");
 const mongoose = require('mongoose');
 const cors = require('cors')
 
-const utilisateur_Routes = require('./routes/utilisateurRoutes/index');
-const niveau_Routes= require('./routes/niveauRoutes/index');
-const absence_Routes = require('./routes/absenceRoutes/index');
-const affectation_Routes = require('./routes/affectationRoutes/index');
-const stagiaire_Routes = require('./routes/stagiaireRoutes/index');
-const filier_Routes = require('./routes/filierRoutes/index');
-
+const utilisateur_Routes = require('./routes/UilisateurRoutes/index');
+const niveau_Routes= require('./routes/NiveauRoutes');
+const absence_Routes = require('./routes/AbsenceRoutes');
+const affectation_Routes = require('./routes/AaffectationRoutes');
+const stagiaire_Routes = require('./routes/StagiaireRoutes');
+const filier_Routes = require('./routes/FilierRoutes');
+const groupe_Routes  = require('./routes/GroupeRoutes');
 
 
 //set up express app

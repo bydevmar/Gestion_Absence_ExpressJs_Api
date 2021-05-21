@@ -1,7 +1,7 @@
-const getUtilisateurs  = require("../utilisateurRoutes/getUtilisateurs.route");
-const postUtilisateur  = require("../utilisateurRoutes/postUtilisateurs.route");
-const putUtilisateur  = require("../utilisateurRoutes/putUtilisateurs.route");
-const deleteUtilisateur  = require("../utilisateurRoutes/deleteUtilisateurs.route");
+const getUtilisateurs  = require("./getUtilisateur.route");
+const postUtilisateur  = require("./postUtilisateurs.route");
+const putUtilisateur  = require("./putUtilisateurs.route");
+const deleteUtilisateur  = require("./deleteUtilisateurs.route");
 const getUtilisateur = require("./getUtilisateur.route")
 
 const routes = [getUtilisateurs,postUtilisateur,putUtilisateur,deleteUtilisateur,getUtilisateur]

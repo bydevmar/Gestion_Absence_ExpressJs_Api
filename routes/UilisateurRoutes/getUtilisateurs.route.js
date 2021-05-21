@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const Utilisateur = require("../../models/Utilisateurs.model");
+const Utilisateur = require("../../models/Utilisateur.model");
 
 router.get('/api/utilisateurs/:id_g',(req,res)=>{
     Utilisateur.findById(req.params.id_g)

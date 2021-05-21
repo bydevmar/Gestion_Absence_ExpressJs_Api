@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
 
-const Groupe = require("../../models/Groupes.model");
-const Utilisateur = require("../../models/Utilisateurs.model");
-const groupeSchema = require('../../helpers/groupex.validator')
+const Groupe = require("../../models/Groupe.model");
+const Utilisateur = require("../../models/Utilisateur.model");
+const groupeSchema = require('../../helpers/Groupe.validator')
 
 router.post('/api/groupes/:id_g',(req,res)=>{
     Utilisateur.findById(req.params.id_g)

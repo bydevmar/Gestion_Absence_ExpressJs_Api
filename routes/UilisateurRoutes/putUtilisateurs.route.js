@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const Utilisateur = require("../../models/Utilisateurs.model");
+const Utilisateur = require("../../models/Utilisateur.model");
 const utilisateurSchema = require('../../helpers/utilisateur.validator')
 
 
