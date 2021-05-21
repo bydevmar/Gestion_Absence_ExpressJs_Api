@@ -7,7 +7,8 @@ const Stagiaire = require("../../models/Stagiaire.model");
 const Affectation = require("../../models/Affectation.model");
 const absenceSchema = require('../../helpers/Absence.validator')
 
-router.post('/api/absences', (req, res) => {
+
+router.put('/api/absences/:id_a', (req, res) => {
     absenceSchema.validateAsync(req.body)
         .then(() => {
             Utilisateur.findById(req.body.formateur)
@@ -18,26 +19,26 @@ router.post('/api/absences', (req, res) => {
                                 Affectation.findOne({ "groupe": stagiaire.groupe._id, "formateur": req.body.formateur })
                                     .then((affectation) => {
                                         if (affectation != null) {
-                                            Absence.create(req.body)//check if "absence" already exists later 
-                                                .then((absence) => {
-                                                    res.send({
-                                                        status: "OK",
-                                                        message: "absence ajouté avec succès!",
-                                                        details: absence
-                                                    });
+                                            Absence.updateOne({ _id: req.params.id_a }, req.body)
+                                                .then(() => {
+                                                    res.status(200)
+                                                        .send({
+                                                            status: "OK",
+                                                            message: "absences modifié avec succès!",
+                                                            details: req.body
+                                                        });
                                                 })
                                         } else {
                                             res.send({
                                                 status: "ERROR",
-                                                message: "Vous pouvez pas marquer l'absence à ce groupe!"
+                                                message: "Vous pouvez pas modifier l'absence à ce groupe!"
                                             });
                                         }
-
                                     })
                                     .catch(() => {
                                         res.send({
                                             status: "ERROR",
-                                            message: "Erreur lors de marquages d'absence!"
+                                            message: "Erreur lors de modification de cette absence!"
                                         });
                                     })
                             }).catch(() => {
@@ -54,6 +55,11 @@ router.post('/api/absences', (req, res) => {
                     });
                 })
 
+        }).catch((error) => {
+            res.send({
+                status: "ERROR",
+                message: error.details[0].message
+            });
         })
 })
 
