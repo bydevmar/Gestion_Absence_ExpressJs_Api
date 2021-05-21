@@ -3,12 +3,12 @@ const mongoose = require('mongoose'),
       mongoose_delete = require('mongoose-delete');
 
 //create schemamodel
-const niveauxSchema = new Schema({
+const niveauSchema = new Schema({
     designation : String
 },{ timestamps: true })
 
-niveauxSchema.plugin(mongoose_delete);
+niveauSchema.plugin(mongoose_delete);
 
-const Niveau = mongoose.model("Niveau",niveauxSchema);
+const Niveau = mongoose.model("Niveau",niveauSchema);
 
 module.exports = Niveau;

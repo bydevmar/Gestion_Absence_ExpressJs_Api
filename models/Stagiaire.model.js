@@ -6,7 +6,7 @@ const StagiairesSchema = new Schema({
     numinscription : String ,
     nom:String ,
     prenom : String ,
-    id_groupe : {type : Schema.Types.ObjectId, ref: "Groupe" }
+    groupe : {type : Schema.Types.ObjectId, ref: "Groupe" }
 },{ timestamps: true })
 
 StagiairesSchema.plugin(mongoose_delete);

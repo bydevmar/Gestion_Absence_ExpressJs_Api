@@ -6,7 +6,7 @@ const mongoose = require('mongoose'),
 const GroupesSchema = new Schema({
     designation : String,
     annee : String,
-    id_filier : {type : Schema.Types.ObjectId, ref: "Filier" }
+    filier : {type : Schema.Types.ObjectId, ref: "Filier" }
 },{ timestamps: true })
 
 GroupesSchema.plugin(mongoose_delete);

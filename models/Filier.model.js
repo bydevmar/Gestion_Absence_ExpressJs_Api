@@ -5,7 +5,7 @@ const mongoose = require('mongoose'),
 //create schemamodel
 const filiersSchema = new Schema({
     designation : String,
-    id_niveau : {type : Schema.Types.ObjectId, ref: "Niveau" }
+    niveau : {type : Schema.Types.ObjectId, ref: "Niveau" }
 },{ timestamps: true })
 
 filiersSchema.plugin(mongoose_delete);
