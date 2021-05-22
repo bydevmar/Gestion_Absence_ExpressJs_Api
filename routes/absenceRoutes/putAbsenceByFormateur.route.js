@@ -47,6 +47,11 @@ router.put('/api/absences/:id_a', (req, res) => {
                                     message: "Aucun stagiaire avec ce ID!"
                                 });
                             })
+                    }else{
+                        res.send({
+                            status: "ERROR",
+                            message: "Vos etez pas un formateur!"
+                        });
                     }
                 }).catch(() => {
                     res.send({
