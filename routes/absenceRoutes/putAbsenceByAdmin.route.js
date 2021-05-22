@@ -48,7 +48,7 @@ router.put('/api/absences/:id_g/:id_a', (req, res) => {
                                 });
                             })
                     }
-                    else{
+                    else {
                         res.send({
                             status: "ERROR",
                             message: "Vos etes pas un administrateur!"
