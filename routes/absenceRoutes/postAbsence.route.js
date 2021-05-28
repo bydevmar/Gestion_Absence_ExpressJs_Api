@@ -7,17 +7,17 @@ const Stagiaire = require("../../models/Stagiaire.model");
 const Affectation = require("../../models/Affectation.model");
 const absenceSchema = require('../../helpers/Absence.validator')
 
-router.post('/api/absences', (req, res) => {
+router.post('/api/absences/:id_u', (req, res) => {
     absenceSchema.validateAsync(req.body)
         .then(() => {
-            Utilisateur.findById(req.body.formateur)
-                .then(async (user) => {
-                    if (user.type == "Formateur") {
-                        Stagiaire.findById(req.body.stagiaire).populate("groupe")
-                            .then((stagiaire) => {
-                                Affectation.findOne({ "groupe": stagiaire.groupe._id, "formateur": req.body.formateur })
-                                    .then((affectation) => {
-                                        if (affectation != null) {
+            Stagiaire.findById(req.body.stagiaire).populate("groupe")
+                .then((stagiaire) => {
+                    Affectation.findOne({ "groupe" : stagiaire.groupe._id , "formateur" : req.body.formateur })
+                        .then((affectation) => {
+                            if (affectation != null) {
+                                Utilisateur.findById(req.params.id_u)
+                                    .then((user) => {
+                                        if (user.type == "Gestionnaire") {
                                             Absence.create(req.body)//check if "absence" already exists later 
                                                 .then((absence) => {
                                                     res.send({
@@ -26,34 +26,45 @@ router.post('/api/absences', (req, res) => {
                                                         details: absence
                                                     });
                                                 })
-                                        } else {
-                                            res.send({
-                                                status: "ERROR",
-                                                message: "Vous pouvez pas marquer l'absence à ce groupe!"
-                                            });
+                                        } else if (user.type == "Formateur" && req.params.id_u == req.body.formateur) {
+                                            Absence.create(req.body)//check if "absence" already exists later 
+                                                .then((absence) => {
+                                                    res.send({
+                                                        status: "OK",
+                                                        message: "absence ajouté avec succès!",
+                                                        details: absence
+                                                    });
+                                                })
                                         }
-
-                                    })
-                                    .catch(() => {
+                                    }).catch(() => {
                                         res.send({
                                             status: "ERROR",
-                                            message: "Erreur lors de marquages d'absence!"
+                                            message: "Utilisateur non trouvable!!"
                                         });
                                     })
-                            }).catch(() => {
+                            }else{
                                 res.send({
                                     status: "ERROR",
-                                    message: "Aucun stagiaire avec ce ID!"
+                                    message: "Utilisateur non responsable de ce groupe!"
                                 });
-                            })
-                    }
+                            }
+                        }).catch(() => {
+                            res.send({
+                                status: "ERROR",
+                                message: "Ce formateur n'est pas responsable de ce groupe!"
+                            });
+                        })
                 }).catch(() => {
                     res.send({
                         status: "ERROR",
-                        message: "Erreur lors de vérifications de votre identité!"
+                        message: "Stagiaire non trouvable!"
                     });
                 })
-
+        }).catch((err) => {
+            res.send({
+                status: "ERROR",
+                message: err.details[0].message
+            });
         })
 })
 
