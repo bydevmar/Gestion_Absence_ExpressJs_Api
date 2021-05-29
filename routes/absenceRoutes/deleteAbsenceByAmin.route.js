@@ -9,82 +9,78 @@ const absenceSchema = require('../../helpers/Absence.validator')
 
 
 router.delete('/api/absences/:id_u/:id_a', (req, res) => {
-    absenceSchema.validateAsync(req.body)
-        .then(() => {
-            Utilisateur.findById(req.params.id_u)
-                .then(async (user) => {
-                    if (user.type == "Gestionnaire") {
-                        Stagiaire.findById(req.body.stagiaire).populate("groupe")
-                            .then((stagiaire) => {
-                                Affectation.findOne({ "groupe": stagiaire.groupe._id, "formateur": req.body.formateur })
-                                    .then((affectation) => {
-                                        if (affectation != null) {
-                                            Absence.findById(req.params.id_a)
-                                                .then((absence) => {
-                                                    if (absence.deleted == false) {
-                                                        absence.delete()
-                                                            .then(() => {
-                                                                res.status(200)
-                                                                    .send({
-                                                                        status: "OK",
-                                                                        message: "absences supprimé avec succès!",
-                                                                        details: req.body
-                                                                    });
-                                                            })
-                                                            .catch(() => {
-                                                                res.send({
-                                                                    status: "ERROR",
-                                                                    message: "Erreur lors de la suppression!"
-                                                                });
-                                                            })
-                                                    }
-                                                    else {
-                                                        res.send({
-                                                                status: "ERROR",
-                                                                message: "absence déjà supprime!",
-                                                                details: req.body
+    Absence.findById(req.params.id_a)
+        .then((absence) => {
+            if (absence.deleted == false) {
+                Utilisateur.findById(req.params.id_u)
+                    .then((user) => {
+                        if (user.type == "Gestionnaire") {
+                            Stagiaire.findById(absence.stagiaire).populate("groupe")
+                                .then((stagiaire) => {
+                                    Affectation.findOne({ "groupe": stagiaire.groupe._id, "formateur": absence.formateur })
+                                        .then((affectation) => {
+                                            if (affectation != null) {
+                                                absence
+                                                    .delete()
+                                                    .then(() => {
+                                                        res.status(200)
+                                                            .send({
+                                                                status: "OK",
+                                                                message: "absences supprimé avec succès!",
+                                                                details: absence
                                                             });
-                                                    }
-                                                })
+                                                    }).catch(() => {
+                                                        res.send({
+                                                            status: "ERROR",
+                                                            message: "Erreur lors de la suppression!"
+                                                        });
+                                                    })
+                                            } else {
+                                                res.send({
+                                                    status: "ERROR",
+                                                    message: "Vous pouvez pas supprimer l'absence à ce groupe!"
+                                                });
 
-                                        } else {
+                                            }
+                                        }).catch(() => {
                                             res.send({
                                                 status: "ERROR",
-                                                message: "Vous pouvez pas supprimer l'absence à ce groupe!"
+                                                message: "Erreur lors de suppression de cette absence!"
                                             });
-                                        }
-                                    })
-                                    .catch(() => {
-                                        res.send({
-                                            status: "ERROR",
-                                            message: "Erreur lors de suppression de cette absence!"
-                                        });
-                                    })
-                            }).catch(() => {
-                                res.send({
-                                    status: "ERROR",
-                                    message: "Aucun stagiaire avec ce ID!"
-                                });
-                            })
-                    }else{
+                                        })
+                                }).catch(() => {
+                                    res.send({
+                                        status: "ERROR",
+                                        message: "Aucun stagiaire avec ce ID!"
+                                    });
+                                })
+                        } else {
+                            res.send({
+                                status: "ERROR",
+                                message: "Vos etez pas un administrateur!"
+                            });
+                        }
+                    }).catch(() => {
                         res.send({
                             status: "ERROR",
-                            message: "Vos etez pas un administrateur!"
+                            message: "Erreur lors de vérifications de votre identité!"
                         });
-                    }
-                }).catch(() => {
-                    res.send({
-                        status: "ERROR",
-                        message: "Erreur lors de vérifications de votre identité!"
-                    });
-                })
-
-        }).catch((error) => {
+                    })
+            } else {
+                res.send({
+                    status: "ERROR",
+                    message: "absence déjà supprime!",
+                    details: req.body
+                });
+            }
+        }).catch(() => {
             res.send({
                 status: "ERROR",
-                message: error.details[0].message
+                message: "Absence Introuvable!"
             });
         })
 })
+
+
 
 module.exports = router;
