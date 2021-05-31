@@ -5,8 +5,6 @@ const Absence = require("../../models/Absence.model");
 const Utilisateur = require("../../models/Utilisateur.model");
 const Stagiaire = require("../../models/Stagiaire.model");
 const Affectation = require("../../models/Affectation.model");
-const absenceSchema = require('../../helpers/Absence.validator')
-
 
 router.delete('/api/absences/:id_u/:id_a', (req, res) => {
     Absence.findById(req.params.id_a)
@@ -80,7 +78,5 @@ router.delete('/api/absences/:id_u/:id_a', (req, res) => {
             });
         })
 })
-
-
 
 module.exports = router;
