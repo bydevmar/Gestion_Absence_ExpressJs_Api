@@ -7,9 +7,9 @@ const stagiaireSchema = require('../../helpers/stagiaire.validator')
 
 router.post('/api/stagiaires/:id_g',(req,res)=>{
     Utilisateur.findById(req.params.id_g)
-    .then(async(utilisateur)=>{
+    .then((utilisateur)=>{
         if(utilisateur.type == "Gestionnaire"){
-            await stagiaireSchema.validateAsync(req.body)
+            stagiaireSchema.validateAsync(req.body)
             .then(()=>{
                 Stagiaire.create(req.body)
                 .then((stagiaire)=>{

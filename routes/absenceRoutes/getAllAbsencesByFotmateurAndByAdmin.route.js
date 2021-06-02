@@ -22,6 +22,8 @@ router.get('/api/absences/:id_u', (req, res) => {
                                         .map((absence) => {
                                             return {
                                                 "_id": absence._id,
+                                                "formateur":absence.formateur._id,
+                                                "stagiaire":absence.stagiaire._id,
                                                 "numinscription": absence.stagiaire.numinscription,
                                                 "nom": absence.stagiaire.nom,
                                                 "prenom": absence.stagiaire.prenom,
@@ -42,6 +44,8 @@ router.get('/api/absences/:id_u', (req, res) => {
                                     .map((absence) => {
                                         return {
                                             "_id": absence._id,
+                                            "formateur":absence.formateur._id,
+                                            "stagiaire":absence.stagiaire._id,
                                             "numinscription": absence.stagiaire.numinscription,
                                             "nom": absence.stagiaire.nom,
                                             "prenom": absence.stagiaire.prenom,
