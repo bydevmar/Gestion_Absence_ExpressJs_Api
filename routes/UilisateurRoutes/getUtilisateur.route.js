@@ -7,10 +7,19 @@ router.post('/api/utilisateur', (req, res) => {
         Utilisateur.findOne({ email: req.body.email, motdepasse: req.body.motdepasse })
             .then((utilisateur) => {
                 if (utilisateur != null) {
-                    res.status(200).send({
-                        status: "OK",
-                        details: utilisateur
-                    });
+                    if(utilisateur.deleted == false){
+                        res.status(200).send({
+                            status: "OK",
+                            details: utilisateur,
+                            message : "vous avez réussi à vous connecter!"
+                        });
+                    }else{
+                        res.status(200).send({
+                            status: "ERROR",
+                            message 
+                        });
+                    }
+                    
                 }else{
                     res.status(200).send({
                         status: "ERROR",
@@ -19,13 +28,13 @@ router.post('/api/utilisateur', (req, res) => {
                 }
             })
             .catch(() => {
-                res.status(400).send({
+                res.send({
                     status: "ERROR",
                     message: "aucun utilisateur corresponde!!"
                 });
             });
     } else {
-        res.status(400).send({
+        res.send({
             status: "ERROR",
             message: "les champs sont vides!!"
         });

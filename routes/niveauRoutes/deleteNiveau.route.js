@@ -18,27 +18,27 @@ router.delete("/api/niveaux/:id_g/:id_n", (req,res) => {
                 }
                 niveau.delete()
                 .then((delniveau)=>{
-                    res.status(400).send({
+                    res.send({
                         status : "OK",
                         message : "niveau supprimé avec succès!",
                         details : delniveau
                     });
                 })
             }).catch(()=>{
-                res.status(400).send({
+                res.send({
                     status : "ERROR",
                     message : "aucun compte corresponde!"
                 });
             })
         }
         else{
-            res.status(400).send({
+            res.send({
                 status : "ERROR",
                 message : "excusez moi vous etes pas un administrateur!"
             });
         }
     }).catch(()=>{
-        res.status(400).send({
+        res.send({
             status : "ERROR",
             message : "administrateur non trouvable!"
         });

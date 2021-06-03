@@ -12,32 +12,37 @@ router.delete("/api/utilisateurs/:id_g/:id_u", (req,res) => {
                 if(utilisateur.deleted == true){
                     return res.send({
                         status : "ERROR",
-                        message : "Utilisateur deja supprimé!"
+                        message : "Utilisateur n'exist pas!"
                     });
                 }
                 utilisateur.delete()
                 .then((deleteduser)=>{
-                    res.status(400).send({
+                    res.send({
                         status : "OK",
                         message : "Utilisateur supprimé avec succès!",
                         details : deleteduser
                     });
+                }).catch(()=>{
+                    res.send({
+                        status : "ERROR",
+                        message : "error lors de la suppression!"
+                    });
                 })
             }).catch(()=>{
-                res.status(400).send({
+                res.send({
                     status : "ERROR",
                     message : "aucun compte corresponde!"
                 });
             })
         }
         else{
-            res.status(400).send({
+            res.send({
                 status : "ERROR",
                 message : "excusez moi vous etes pas un administrateur!"
             });
         }
     }).catch(()=>{
-        res.status(400).send({
+        res.send({
             status : "ERROR",
             message : "administrateur non trouvable!"
         });

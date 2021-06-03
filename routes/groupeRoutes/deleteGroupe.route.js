@@ -18,27 +18,27 @@ router.delete("/api/groupes/:id_g/:id_n", (req,res) => {
                 }
                 groupe.delete()
                 .then((delgroupe)=>{
-                    res.status(400).send({
+                    res.send({
                         status : "OK",
                         message : "groupe supprimé avec succès!",
                         details : delgroupe
                     });
                 })
             }).catch(()=>{
-                res.status(400).send({
+                res.send({
                     status : "ERROR",
                     message : "aucun compte corresponde!"
                 });
             })
         }
         else{
-            res.status(400).send({
+            res.send({
                 status : "ERROR",
                 message : "excusez moi vous etes pas un administrateur!"
             });
         }
     }).catch(()=>{
-        res.status(400).send({
+        res.send({
             status : "ERROR",
             message : "administrateur non trouvable!"
         });

@@ -18,27 +18,27 @@ router.delete("/api/affectations/:id_g/:id_n", (req,res) => {
                 }
                 affectation.delete()
                 .then((delaffectation)=>{
-                    res.status(400).send({
+                    res.send({
                         status : "OK",
                         message : "affectation supprimé avec succès!",
                         details : delaffectation
                     });
                 })
             }).catch(()=>{
-                res.status(400).send({
+                res.send({
                     status : "ERROR",
                     message : "aucun compte corresponde!"
                 });
             })
         }
         else{
-            res.status(400).send({
+            res.send({
                 status : "ERROR",
                 message : "excusez moi vous etes pas un administrateur!"
             });
         }
     }).catch(()=>{
-        res.status(400).send({
+        res.send({
             status : "ERROR",
             message : "administrateur non trouvable!"
         });

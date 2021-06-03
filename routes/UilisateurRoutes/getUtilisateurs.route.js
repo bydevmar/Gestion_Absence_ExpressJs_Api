@@ -11,7 +11,7 @@ router.get('/api/utilisateurs/:id_g',(req,res)=>{
             .then((utilisateurs)=>{
                 res.send({
                     status : "OK",
-                    details : utilisateurs.filter(user  => user.deleted == false)
+                    details : utilisateurs.filter(user => user.deleted == false)
                 });
             }).catch((err)=>{
                 res.send({
@@ -21,13 +21,13 @@ router.get('/api/utilisateurs/:id_g',(req,res)=>{
             })
         }
         else{
-            res.status(400).send({
+            res.send({
                 status : "ERROR",
                 message : "excusez moi vous etes pas un administrateur!"
             });
         }
     }).catch(()=>{
-        res.status(400).send({
+        res.send({
             status : "ERROR",
             message : "aucun compte corresponde!"
         });

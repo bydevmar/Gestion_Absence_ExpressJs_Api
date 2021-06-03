@@ -4,12 +4,11 @@ const router = express.Router();
 const Utilisateur = require("../../models/Utilisateur.model");
 const utilisateurSchema = require('../../helpers/utilisateur.validator')
 
-
 router.post('/api/utilisateurs/:id_g',(req,res)=>{
     Utilisateur.findById(req.params.id_g)
-    .then(async(utilisateur)=>{
+    .then((utilisateur)=>{
         if(utilisateur.type == "Gestionnaire"){
-            await utilisateurSchema.validateAsync(req.body)
+            utilisateurSchema.validateAsync(req.body)
             .then(()=>{
                 Utilisateur.create(req.body)
                 .then((utilisateur)=>{
@@ -27,13 +26,13 @@ router.post('/api/utilisateurs/:id_g',(req,res)=>{
             })
         }
         else{
-            res.status(400).send({
+            res.send({
                 status : "ERROR",
                 message : "excusez moi vous etes pas un administrateur!"
             });
         }
     }).catch(()=>{
-        res.status(400).send({
+        res.send({
             status : "ERROR",
             message : "aucun compte corresponde!"
         });

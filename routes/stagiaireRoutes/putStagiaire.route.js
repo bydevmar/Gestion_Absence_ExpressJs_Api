@@ -3,21 +3,26 @@ const router = express.Router();
 
 const Stagiaire = require("../../models/Stagiaire.model");
 const Utilisateur = require("../../models/Utilisateur.model");
-const stagiaireSchema = require('../../helpers/stagiaire.validator')
+const stagiaireSchema = require('../../helpers/stagiaire.validator');
 
-router.put('/api/stagiaires/:id_g/:id_u',(req,res)=>{
+router.put('/api/stagiaires/:id_g/:id_s',(req,res)=>{
     Utilisateur.findById(req.params.id_g)
-    .then(async ( utilisateur ) => {
+    .then( (utilisateur) => {
         if( utilisateur.type == "Gestionnaire"){
-            await stagiaireSchema.validateAsync(req.body)
+            stagiaireSchema.validateAsync(req.body)
             .then((result)=>{
-                Stagiaire.updateOne({ _id : req.params.id_u } , req.body )
+                Stagiaire.updateOne({ _id : req.params.id_s } , req.body )
                 .then( ()=> {
                     res.status(200).send({
                         status : "OK",
                         message : "stagiaires modifié avec succès!",
                         details : result
                     });
+                }).catch(()=>{
+                    res.send({
+                        status : "ERROR",
+                        message : "stagiaire non trouvé"
+                    })
                 })
             })
             .catch((err)=>{
@@ -27,19 +32,17 @@ router.put('/api/stagiaires/:id_g/:id_u',(req,res)=>{
                 })
             })
         }else{
-            res.status(400).send({
+            res.send({
                 status : "ERROR",
                 message : "excusez moi vous etes pas un administrateur!"
             });
         }})
     .catch(()=>{
-        res.status(400).send({
+        res.send({
             status : "ERROR",
             message : "aucun compte corresponde!"
         });
     })
 })
-
-
 
 module.exports = router;

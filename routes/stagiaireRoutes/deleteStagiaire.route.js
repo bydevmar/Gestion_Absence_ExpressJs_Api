@@ -3,13 +3,12 @@ const router = express.Router();
 
 const Stagiaire = require("../../models/Stagiaire.model");
 const Utilisateur = require("../../models/Utilisateur.model");
-const stagiaireSchema = require('../../helpers/stagiaire.validator')
 
-router.delete("/api/stagiaires/:id_g/:id_n", (req,res) => {
+router.delete("/api/stagiaires/:id_g/:id_s", (req,res) => {
     Utilisateur.findById(req.params.id_g)
     .then((utilisateur)=>{
         if(utilisateur.type == "Gestionnaire"){
-            Stagiaire.findById(req.params.id_n)
+            Stagiaire.findById(req.params.id_s)
             .then((stagiaire)=>{
                 if(stagiaire.deleted == true){
                     return res.send({
@@ -19,27 +18,27 @@ router.delete("/api/stagiaires/:id_g/:id_n", (req,res) => {
                 }
                 stagiaire.delete()
                 .then((delstagiaire)=>{
-                    res.status(400).send({
+                    res.send({
                         status : "OK",
                         message : "stagiaire supprimé avec succès!",
                         details : delstagiaire
                     });
                 })
             }).catch(()=>{
-                res.status(400).send({
+                res.send({
                     status : "ERROR",
-                    message : "aucun compte corresponde!"
+                    message : "aucun stagiaire corresponde!"
                 });
             })
         }
         else{
-            res.status(400).send({
+            res.send({
                 status : "ERROR",
                 message : "excusez moi vous etes pas un administrateur!"
             });
         }
     }).catch(()=>{
-        res.status(400).send({
+        res.send({
             status : "ERROR",
             message : "administrateur non trouvable!"
         });

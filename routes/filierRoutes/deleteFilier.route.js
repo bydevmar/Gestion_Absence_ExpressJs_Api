@@ -18,27 +18,27 @@ router.delete("/api/filiers/:id_g/:id_n", (req,res) => {
                 }
                 filier.delete()
                 .then((delfilier)=>{
-                    res.status(400).send({
+                    res.send({
                         status : "OK",
                         message : "filier supprimé avec succès!",
                         details : delfilier
                     });
                 })
             }).catch(()=>{
-                res.status(400).send({
+                res.send({
                     status : "ERROR",
                     message : "aucun compte corresponde!"
                 });
             })
         }
         else{
-            res.status(400).send({
+            res.send({
                 status : "ERROR",
                 message : "excusez moi vous etes pas un administrateur!"
             });
         }
     }).catch(()=>{
-        res.status(400).send({
+        res.send({
             status : "ERROR",
             message : "administrateur non trouvable!"
         });

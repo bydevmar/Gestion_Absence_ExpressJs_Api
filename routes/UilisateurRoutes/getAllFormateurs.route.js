@@ -21,13 +21,13 @@ router.get('/api/formateurs/:id_g',(req,res)=>{
             })
         }
         else{
-            res.status(400).send({
+            res.send({
                 status : "ERROR",
                 message : "excusez moi vous etes pas un administrateur!"
             });
         }
     }).catch(()=>{
-        res.status(400).send({
+        res.send({
             status : "ERROR",
             message : "aucun compte corresponde!"
         });
