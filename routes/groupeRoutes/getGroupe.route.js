@@ -2,23 +2,30 @@ const express = require("express");
 const router = express.Router();
 
 const Utilisateur = require("../../models/Utilisateur.model");
-const Affectation = require("../../models/Affectation.model");
 const Groupe = require("../../models/Groupe.model");
 
-router.get('/api/groupes/:id_u', (req, res) => {
-    let groups = [];
+router.get('/api/groupe/:id_u/:id_g', (req, res) => {
     Utilisateur
         .findById(req.params.id_u)
         .then(utilisateur => {
             if (utilisateur.type == "Gestionnaire") {
                 Groupe
-                    .find({})
-                    .then(groupes => {
-                        res.send({
-                            status: "OK",
-                            details: groupes
-                                .filter(groupe => groupe.deleted == false)
-                        });
+                    .findById(req.params.id_g)
+                    .populate("filier")
+                    .then(groupe => {
+                        if(groupe && groupe.deleted == false){
+                            res.send({
+                                status: "OK",
+                                details: {
+                                    "_id": groupe._id,
+                                    "designation":groupe.designation,
+                                    "annee":groupe.annee,
+                                    "filier": groupe.filier.designation,
+                                    "idfilier": groupe.filier._id,
+                                }
+                            });
+                        }
+                        
                     })
                     .catch(error => {
                         res.send({
@@ -27,34 +34,15 @@ router.get('/api/groupes/:id_u', (req, res) => {
                         })
                     })
             } else if (utilisateur.type == "Formateur") {
-                Affectation.find({ "formateur": req.params.id_u })
-                    .then((affectations) => {
-                        affectations.map(affectation => {
-                            groups.push(affectation.groupe.toString())
-                        })
-                    })
-                    .then(() => {
-                        Groupe
-                            .find({})
-                            .then(groupes => {
-                                res.send({
-                                    status: "OK",
-                                    details: groupes
-                                        .filter(groupe => (groups.includes(groupe._id.toString()) && groupe.deleted == false))
-                                });
-                            })
-                    })
-                    .catch(error => {
-                        res.send({
-                            status: "ERROR",
-                            details: "Aucun affectation ne corresponde!"
-                        })
-                    })
-            }
+                res.send({
+                    status: "OK",
+                    message:"vous pouvez pas acceseder aux ces informations!" 
+                })
+            }               
         }).catch(error => {
             res.send({
                 status: "ERROR",
-                details: "error utilisateur"
+                message: "Administrateur non trouvé!"
             })
         })
 });

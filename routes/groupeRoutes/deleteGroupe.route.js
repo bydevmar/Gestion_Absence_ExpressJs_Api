@@ -4,16 +4,16 @@ const router = express.Router();
 const Groupe = require("../../models/Groupe.model");
 const Utilisateur = require("../../models/Utilisateur.model");
 
-router.delete("/api/groupes/:id_g/:id_n", (req,res) => {
-    Utilisateur.findById(req.params.id_g)
+router.delete("/api/groupes/:id_admin/:id_groupe", (req,res) => {
+    Utilisateur.findById(req.params.id_admin)
     .then((utilisateur)=>{
         if(utilisateur.type == "Gestionnaire"){
-            Groupe.findById(req.params.id_n)
+            Groupe.findById(req.params.id_groupe)
             .then((groupe)=>{
                 if(groupe.deleted == true){
                     return res.send({
                         status : "ERROR",
-                        message : "groupe deja supprimé!"
+                        message : "Aucun groupe trouvable!"
                     });
                 }
                 groupe.delete()

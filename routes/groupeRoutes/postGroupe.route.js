@@ -7,9 +7,9 @@ const groupeSchema = require('../../helpers/Groupe.validator')
 
 router.post('/api/groupes/:id_g',(req,res)=>{
     Utilisateur.findById(req.params.id_g)
-    .then(async(utilisateur)=>{
+    .then((utilisateur)=>{
         if(utilisateur.type == "Gestionnaire"){
-            await groupeSchema.validateAsync(req.body)
+            groupeSchema.validateAsync(req.body)
             .then(()=>{
                 Groupe.create(req.body)
                 .then((groupe)=>{

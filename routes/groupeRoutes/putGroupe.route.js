@@ -5,17 +5,17 @@ const Groupe = require("../../models/Groupe.model");
 const Utilisateur = require("../../models/Utilisateur.model");
 const groupeSchema = require('../../helpers/Groupe.validator')
 
-router.put('/api/groupes/:id_g/:id_u',(req,res)=>{
-    Utilisateur.findById(req.params.id_g)
-    .then(async ( utilisateur ) => {
+router.put('/api/groupes/:id_admin/:id_groupe',(req,res)=>{
+    Utilisateur.findById(req.params.id_admin)
+    .then(( utilisateur ) => {
         if( utilisateur.type == "Gestionnaire"){
-            await groupeSchema.validateAsync(req.body)
+            groupeSchema.validateAsync(req.body)
             .then((result)=>{
-                Groupe.updateOne({ _id : req.params.id_u } , req.body )
+                Groupe.updateOne({ _id : req.params.id_groupe } , req.body )
                 .then( ()=> {
                     res.status(200).send({
                         status : "OK",
-                        message : "groupex modifié avec succès!",
+                        message : "Groupe modifié avec succès!",
                         details : result
                     });
                 })
@@ -29,7 +29,7 @@ router.put('/api/groupes/:id_g/:id_u',(req,res)=>{
         }else{
             res.send({
                 status : "ERROR",
-                message : "excusez moi vous etes pas un administrateur!"
+                message : "vous etes pas un administrateur!"
             });
         }})
     .catch(()=>{
