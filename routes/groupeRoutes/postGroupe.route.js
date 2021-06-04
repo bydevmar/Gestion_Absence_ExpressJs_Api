@@ -5,8 +5,8 @@ const Groupe = require("../../models/Groupe.model");
 const Utilisateur = require("../../models/Utilisateur.model");
 const groupeSchema = require('../../helpers/Groupe.validator')
 
-router.post('/api/groupes/:id_g',(req,res)=>{
-    Utilisateur.findById(req.params.id_g)
+router.post('/api/groupes/:id_admin',(req,res)=>{
+    Utilisateur.findById(req.params.id_admin)
     .then((utilisateur)=>{
         if(utilisateur.type == "Gestionnaire"){
             groupeSchema.validateAsync(req.body)

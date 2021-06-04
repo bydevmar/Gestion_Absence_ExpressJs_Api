@@ -5,15 +5,13 @@ const Niveau = require("../../models/Niveau.model");
 const Utilisateur = require("../../models/Utilisateur.model");
 const niveauSchema = require('../../helpers/Niveau.validator')
 
-
-
-router.put('/api/niveaux/:id_g/:id_u',(req,res)=>{
-    Utilisateur.findById(req.params.id_g)
-    .then(async ( utilisateur ) => {
+router.put('/api/niveaux/:id_admin/:id_niveau',(req,res)=>{
+    Utilisateur.findById(req.params.id_admin)
+    .then( ( utilisateur ) => {
         if( utilisateur.type == "Gestionnaire"){
-            await niveauSchema.validateAsync(req.body)
+             niveauSchema.validateAsync(req.body)
             .then((result)=>{
-                Niveau.updateOne({ _id : req.params.id_u } , req.body )
+                Niveau.updateOne({ _id : req.params.id_niveau } , req.body )
                 .then( ()=> {
                     res.status(200).send({
                         status : "OK",

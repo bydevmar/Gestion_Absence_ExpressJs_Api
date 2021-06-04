@@ -12,7 +12,7 @@ router.put('/api/absences/:id_a', (req, res) => {
     absenceSchema.validateAsync(req.body)
         .then(() => {
             Utilisateur.findById(req.body.formateur)
-                .then(async (user) => {
+                .then( (user) => {
                     if (user.type == "Formateur") {
                         Stagiaire.findById(req.body.stagiaire).populate("groupe")
                             .then((stagiaire) => {

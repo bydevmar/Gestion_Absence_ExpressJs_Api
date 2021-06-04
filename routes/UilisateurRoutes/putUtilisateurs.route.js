@@ -4,8 +4,8 @@ const router = express.Router();
 const Utilisateur = require("../../models/Utilisateur.model");
 const utilisateurSchema = require('../../helpers/utilisateur.validator');
 
-router.put('/api/utilisateurs/:id_g/:id_u',(req,res)=>{
-    Utilisateur.findById(req.params.id_g)
+router.put('/api/utilisateurs/:id_admin/:id_u',(req,res)=>{
+    Utilisateur.findById(req.params.id_admin)
     .then( ( utilisateur ) => {
         if( utilisateur.type == "Gestionnaire"){
             utilisateurSchema.validateAsync(req.body)

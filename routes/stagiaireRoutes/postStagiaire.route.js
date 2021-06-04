@@ -5,8 +5,8 @@ const Stagiaire = require("../../models/Stagiaire.model");
 const Utilisateur = require("../../models/Utilisateur.model");
 const stagiaireSchema = require('../../helpers/stagiaire.validator')
 
-router.post('/api/stagiaires/:id_g',(req,res)=>{
-    Utilisateur.findById(req.params.id_g)
+router.post('/api/stagiaires/:id_admin',(req,res)=>{
+    Utilisateur.findById(req.params.id_admin)
     .then((utilisateur)=>{
         if(utilisateur.type == "Gestionnaire"){
             stagiaireSchema.validateAsync(req.body)

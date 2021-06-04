@@ -3,9 +3,9 @@ const router = express.Router();
 
 const Utilisateur = require("../../models/Utilisateur.model");
 
-router.get('/api/utilisateurs/:id_g',(req,res)=>{
-    Utilisateur.findById(req.params.id_g)
-    .then(async(utilisateur)=>{
+router.get('/api/utilisateurs/:id_admin',(req,res)=>{
+    Utilisateur.findById(req.params.id_admin)
+    .then((utilisateur)=>{
         if(utilisateur.type == "Gestionnaire"){
             Utilisateur.find({})
             .then((utilisateurs)=>{

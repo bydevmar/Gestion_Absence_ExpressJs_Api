@@ -4,13 +4,13 @@ const router = express.Router();
 const Utilisateur = require("../../models/Utilisateur.model");
 const Groupe = require("../../models/Groupe.model");
 
-router.get('/api/groupe/:id_u/:id_g', (req, res) => {
+router.get('/api/groupe/:id_u/:id_admin', (req, res) => {
     Utilisateur
         .findById(req.params.id_u)
         .then(utilisateur => {
             if (utilisateur.type == "Gestionnaire") {
                 Groupe
-                    .findById(req.params.id_g)
+                    .findById(req.params.id_admin)
                     .populate("filier")
                     .then(groupe => {
                         if(groupe && groupe.deleted == false){

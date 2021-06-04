@@ -4,8 +4,8 @@ const router = express.Router();
 const Niveau = require("../../models/Niveau.model");
 const Utilisateur = require("../../models/Utilisateur.model");
 
-router.delete("/api/niveaux/:id_g/:id_n", (req,res) => {
-    Utilisateur.findById(req.params.id_g)
+router.delete("/api/niveaux/:id_admin/:id_n", (req,res) => {
+    Utilisateur.findById(req.params.id_admin)
     .then((utilisateur)=>{
         if(utilisateur.type == "Gestionnaire"){
             Niveau.findById(req.params.id_n)

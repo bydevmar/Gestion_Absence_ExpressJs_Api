@@ -5,11 +5,11 @@ const Filier = require("../../models/Filier.model");
 const Utilisateur = require("../../models/Utilisateur.model");
 const filierSchema = require('../../helpers/filier.validator')
 
-router.post('/api/filiers/:id_g',(req,res)=>{
-    Utilisateur.findById(req.params.id_g)
-    .then(async(utilisateur)=>{
+router.post('/api/filiers/:id_admin',(req,res)=>{
+    Utilisateur.findById(req.params.id_admin)
+    .then((utilisateur)=>{
         if(utilisateur.type == "Gestionnaire"){
-            await filierSchema.validateAsync(req.body)
+            filierSchema.validateAsync(req.body)
             .then(()=>{
                 Filier.create(req.body)
                 .then((filier)=>{

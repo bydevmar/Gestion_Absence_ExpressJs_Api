@@ -8,11 +8,11 @@ const Affectation = require("../../models/Affectation.model");
 const absenceSchema = require('../../helpers/Absence.validator')
 
 
-router.put('/api/absences/:id_g/:id_a', (req, res) => {
+router.put('/api/absences/:id_admin/:id_a', (req, res) => {
     absenceSchema.validateAsync(req.body)
         .then(() => {
-            Utilisateur.findById(req.params.id_g)
-                .then(async (user) => {
+            Utilisateur.findById(req.params.id_admin)
+                .then( (user) => {
                     if (user.type == "Gestionnaire") {
                         Stagiaire.findById(req.body.stagiaire).populate("groupe")
                             .then((stagiaire) => {

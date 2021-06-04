@@ -3,8 +3,8 @@ const router = express.Router();
 
 const Utilisateur = require("../../models/Utilisateur.model");
 
-router.delete("/api/utilisateurs/:id_g/:id_u", (req,res) => {
-    Utilisateur.findById(req.params.id_g)
+router.delete("/api/utilisateurs/:id_admin/:id_u", (req,res) => {
+    Utilisateur.findById(req.params.id_admin)
     .then((utilisateur)=>{
         if(utilisateur.type == "Gestionnaire"){
             Utilisateur.findById(req.params.id_u)

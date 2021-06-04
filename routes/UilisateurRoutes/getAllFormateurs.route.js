@@ -3,8 +3,8 @@ const router = express.Router();
 
 const Utilisateur = require("../../models/Utilisateur.model");
 
-router.get('/api/formateurs/:id_g',(req,res)=>{
-    Utilisateur.findById(req.params.id_g)
+router.get('/api/formateurs/:id_admin',(req,res)=>{
+    Utilisateur.findById(req.params.id_admin)
     .then((utilisateur)=>{
         if(utilisateur.type == "Gestionnaire"){
             Utilisateur.find({"type" : "Formateur" })

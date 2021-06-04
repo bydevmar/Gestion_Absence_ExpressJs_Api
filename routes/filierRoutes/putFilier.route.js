@@ -5,15 +5,13 @@ const Filier = require("../../models/Filier.model");
 const Utilisateur = require("../../models/Utilisateur.model");
 const filierSchema = require('../../helpers/filier.validator')
 
-
-
-router.put('/api/filiers/:id_g/:id_u',(req,res)=>{
-    Utilisateur.findById(req.params.id_g)
-    .then(async ( utilisateur ) => {
+router.put('/api/filiers/:id_admin/:id_filier',(req,res)=>{
+    Utilisateur.findById(req.params.id_admin)
+    .then( ( utilisateur ) => {
         if( utilisateur.type == "Gestionnaire"){
-            await filierSchema.validateAsync(req.body)
+             filierSchema.validateAsync(req.body)
             .then((result)=>{
-                Filier.updateOne({ _id : req.params.id_u } , req.body )
+                Filier.updateOne({ _id : req.params.id_filier } , req.body )
                 .then( ()=> {
                     res.status(200).send({
                         status : "OK",

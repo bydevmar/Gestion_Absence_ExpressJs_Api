@@ -5,11 +5,11 @@ const Affectation = require("../../models/Affectation.model");
 const Utilisateur = require("../../models/Utilisateur.model");
 const affectationSchema = require('../../helpers/Affectation.validator')
 
-router.put('/api/affectations/:id_g/:id_u',(req,res)=>{
-    Utilisateur.findById(req.params.id_g)
-    .then(async ( utilisateur ) => {
+router.put('/api/affectations/:id_admin/:id_u',(req,res)=>{
+    Utilisateur.findById(req.params.id_admin)
+    .then( ( utilisateur ) => {
         if( utilisateur.type == "Gestionnaire"){
-            await affectationSchema.validateAsync(req.body)
+             affectationSchema.validateAsync(req.body)
             .then((result)=>{
                 Affectation.updateOne({ _id : req.params.id_u } , req.body )
                 .then( ()=> {

@@ -2,11 +2,10 @@ const getAllAbsencesByFotmateurAndByAdmin  = require("./getAllAbsencesByFotmateu
 const postabsence = require("./postAbsence.route");
 const putabsencebyFormateur = require("./putAbsenceByFormateur.route");
 const putabsencebyAdmin = require("./putAbsenceByAdmin.route");
-const deleteAbsenceByFormateur = require("./deleteAbsenceByFormateur.route");
-const deleteAbsenceByAdmin = require("./deleteAbsenceByAmin.route");
+const deleteAbsenceByAdminAndFormateur = require("./deleteAbsenceByAdmin&Formateur.route");
 
-const routes = [ getAllAbsencesByFotmateurAndByAdmin , postabsence , putabsencebyFormateur , 
-                deleteAbsenceByFormateur , putabsencebyAdmin , 
-                deleteAbsenceByAdmin];
+const routes = [ getAllAbsencesByFotmateurAndByAdmin , postabsence , 
+                putabsencebyFormateur , putabsencebyAdmin , 
+                deleteAbsenceByAdminAndFormateur];
 
 module.exports = routes;
