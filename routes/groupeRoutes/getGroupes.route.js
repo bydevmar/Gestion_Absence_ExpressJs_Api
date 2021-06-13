@@ -6,6 +6,7 @@ const Affectation = require("../../models/Affectation.model");
 const Groupe = require("../../models/Groupe.model");
 
 router.get('/api/groupes/:id_u', (req, res) => {
+    let groups = [];
     Utilisateur
         .findById(req.params.id_u)
         .then(utilisateur => {
