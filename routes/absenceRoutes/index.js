@@ -1,15 +1,13 @@
 const getAllAbsences  = require("./getAllAbsences.route");
 const getAbsenceById  = require("./getAbsenceById.route");
 const postabsence = require("./postAbsence.route");
-const putabsencebyFormateur = require("./putAbsenceByFormateur.route");
-const putabsencebyAdmin = require("./putAbsenceByAdmin.route");
-const deleteAbsenceByAdminAndFormateur = require("./deleteAbsenceByAdmin&Formateur.route");
+const putAbsence = require("./putAbsence.route");
+const deleteAbsence = require("./deleteAbsence");
 
 const routes = [ getAllAbsences,
                  getAbsenceById, 
                  postabsence,
-                 putabsencebyFormateur,
-                 putabsencebyAdmin,
-                 deleteAbsenceByAdminAndFormateur
+                 putAbsence,
+                 deleteAbsence
                 ];
 module.exports = routes;
