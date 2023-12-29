@@ -16,7 +16,7 @@ Welcome to the `Gestion_Absence_ExpressJs_Api` repository! This is a simple proj
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/your-username/Gestion_Absence_ExpressJs_Api.git
+   git clone https://github.com/bydevmar/Gestion_Absence_ExpressJs_Api.git
    ```
 
 2. Navigate to the project directory:
